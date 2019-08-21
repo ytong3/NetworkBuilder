@@ -9,14 +9,16 @@
 import UIKit
 
 class NowContactViewController: UITableViewController{
-    //MARK: - Fields
+    //MARK: - Dependency
+    let contactRepo = sharedContactRepository
+    
+    //MARK: - Properties
     var contacts: [Contact]?
     var dataSource: ContactsDataSource?
     
-    //MARK: - Properties    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadAvailableContacts()
+        contacts = sharedContactRepository.getContactsDueForCatchUp()
         dataSource = ContactsDataSource(with: self.contacts!, for: "nowContactCell")
         tableView.dataSource = dataSource
         tableView.reloadData()
@@ -40,23 +42,6 @@ extension NowContactViewController{
                 destVC.contact = contacts?[indexPath.row]
             }
         }
-    }
-}
-
-extension NowContactViewController{
-    // MARK: - Data CRUD
-    private func loadAvailableContacts(){
-        contacts = [Contact]()
-        let contact1 = Contact()
-        contact1.firstName = "Jon"
-        contact1.lastName = "Snow"
-        
-        let contact2 = Contact()
-        contact2.firstName = "Arya"
-        contact2.lastName = "Stark"
-        
-        contacts?.append(contact1)
-        contacts?.append(contact2)
     }
 }
 
