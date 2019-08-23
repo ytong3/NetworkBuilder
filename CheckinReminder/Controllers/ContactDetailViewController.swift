@@ -16,6 +16,10 @@ class ContactDetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lastContactDateLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
+    @IBAction func editButtonPressed(_ sender: Any) {
+        print("edit button pressed. sugue to be performed")
+        performSegue(withIdentifier: "gotoEditContact", sender: self)
+    }
     
     override func viewDidLoad() {
         guard let firstName = contact?.firstName,
@@ -25,5 +29,21 @@ class ContactDetailViewController: UIViewController {
         }
         
         nameLabel.text = "\(firstName) \(lastName)"
+        
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM-dd-yyyy"
+        lastContactDateLabel.text = dateFormatter.string(from: lastContactDate)
+    }
+}
+
+//MARK: - Navigation
+extension ContactDetailViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoEditContact"{
+            let destVC = segue.destination as! EditContactViewController
+            
+            destVC.formToEditAContact = true
+            destVC.contactToEdit = contact
+        }
     }
 }

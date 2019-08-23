@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="1657.9710144927537" y="-386.38392857142856"/>
         </scene>
-        <!--Contact Detail View Controller-->
+        <!--Contact Detail-->
         <scene sceneID="JL0-Zs-wgK">
             <objects>
                 <viewController id="XSi-ne-fFf" customClass="ContactDetailViewController" customModule="CheckinReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -80,6 +80,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K7E-H5-hbL"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Contact Detail" id="85i-PM-BKQ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="lla-8U-4gv">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yYI-QE-ta9">
+                                <rect key="frame" x="364" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="XSi-ne-fFf" eventType="touchUpInside" id="dd8-pD-D1P"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="JT6-VR-WRS" kind="show" identifier="gotoEditContact" id="8OJ-Q4-jQp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lastContactDateLabel" destination="uKh-LP-BIV" id="eZD-FR-Yxe"/>
                         <outlet property="nameLabel" destination="RBC-Ul-mql" id="zRP-na-FIw"/>
@@ -88,7 +103,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7o-YE-2BA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="31"/>
+            <point key="canvasLocation" x="2528" y="-161"/>
+        </scene>
+        <!--Edit-->
+        <scene sceneID="T6Q-Ss-gN7">
+            <objects>
+                <viewController id="JT6-VR-WRS" customClass="EditContactViewController" customModule="CheckinReminder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SGS-4J-G2M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8do-KJ-vqQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit" id="ShC-tM-oPa">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="9aS-Am-LtP">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="JT6-VR-WRS" id="Ofm-i1-vxL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eZd-ah-DHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3542" y="31"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -131,7 +168,13 @@
                             <outlet property="delegate" destination="0hg-tt-T8X" id="wVD-fl-Uok"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Kok-cq-0tU"/>
+                    <navigationItem key="navigationItem" id="Kok-cq-0tU">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="7Cr-cF-d97">
+                            <connections>
+                                <segue destination="JT6-VR-WRS" kind="show" id="asL-gk-lwt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="XSi-ne-fFf" kind="show" identifier="goToContact" id="xCs-Re-TfY"/>
                     </connections>
@@ -180,6 +223,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="asL-gk-lwt"/>
         <segue reference="xCs-Re-TfY"/>
     </inferredMetricsTieBreakers>
 </document>

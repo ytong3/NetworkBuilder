@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import RealmSwift
 
 let sharedContactRepository = ContactRepository()
 
 class ContactRepository {
     //MARK: - Properties
+    var realm = try! Realm()
     
+    //MARK: - Methods
     func getContactsDueForCatchUp() -> [Contact] {
         var contacts = [Contact]()
         let contact1 = Contact()
@@ -56,15 +59,36 @@ class ContactRepository {
     }
     
     // TODO: id for a contact?
-    func updateContact(updatedContact: Contact) {
+    func updateContact(updateScript:()->Void) {
         print("contact should be saved")
+        do {
+            try realm.write {
+                updateScript()
+            }
+        }catch{
+            print("error saving contact updates")
+        }
     }
     
     func deleteContact(contactToDelete: Contact) {
         print("contact should be deleted")
+        do {
+            try realm.write{
+                realm.delete(contactToDelete)
+            }
+        }catch{
+            print("error deleting a contact")
+        }
     }
     
     func create(with contact: Contact) {
         print("contact should be created")
+        do {
+            try realm.write{
+                realm.add(contact)
+            }
+        }catch{
+                print("error adding a new contact")
+        }
     }
 }

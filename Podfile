@@ -7,6 +7,7 @@ target 'CheckinReminder' do
 
   # Pods for CheckinReminder
   pod 'RealmSwift'
+  pod 'Eureka'
   pod 'ChameleonFramework'
 
 end
