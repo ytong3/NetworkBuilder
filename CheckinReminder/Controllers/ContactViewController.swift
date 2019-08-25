@@ -7,19 +7,30 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContactViewController: UITableViewController {
     //MARK: - Dependency
     let contactRepo = sharedContactRepository
+    let realm = try! Realm()
     
     //MARK: - Properties
-    var contacts: [Contact]?
+    var contacts: Results<Contact>?
     var dataSource: ContactsDataSource?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contacts = sharedContactRepository.getAllContacts()
-        dataSource = ContactsDataSource(with: self.contacts!, for: "contactCell")
+        loadAllContacts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        loadAllContacts()
+    }
+    
+    private func loadAllContacts(){
+        contacts = realm.objects(Contact.self)
+        dataSource = ContactsDataSource(with: Array(contacts!), for: "contactCell")
         tableView.dataSource = dataSource
         tableView.reloadData()
     }
@@ -37,6 +48,10 @@ extension ContactViewController{
             if let indexPath = tableView.indexPathForSelectedRow{
                 destVC.contact = contacts?[indexPath.row]
             }
+        }else if segue.identifier == "gotoAddContact" {
+            let destVC = segue.destination as! EditContactViewController
+            
+            destVC.formToEditAContact = false
         }
     }
 }

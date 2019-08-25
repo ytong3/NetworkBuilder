@@ -43,7 +43,7 @@ extension ContactDetailViewController {
             let destVC = segue.destination as! EditContactViewController
             
             destVC.formToEditAContact = true
-            destVC.contactToEdit = contact
+            destVC.contactVM = contact
         }
     }
 }

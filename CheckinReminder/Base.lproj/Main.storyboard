@@ -115,13 +115,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8do-KJ-vqQ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit" id="ShC-tM-oPa">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="9aS-Am-LtP">
-                            <connections>
-                                <action selector="saveButtonPressed:" destination="JT6-VR-WRS" id="Ofm-i1-vxL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Edit" id="ShC-tM-oPa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZd-ah-DHN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,7 +165,7 @@
                     <navigationItem key="navigationItem" id="Kok-cq-0tU">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="7Cr-cF-d97">
                             <connections>
-                                <segue destination="JT6-VR-WRS" kind="show" id="asL-gk-lwt"/>
+                                <segue destination="JT6-VR-WRS" kind="show" identifier="gotoAddContact" id="asL-gk-lwt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

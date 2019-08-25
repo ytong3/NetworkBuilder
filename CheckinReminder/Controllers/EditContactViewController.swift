@@ -8,27 +8,30 @@
 
 import UIKit
 import Eureka
+import RealmSwift
 
 class EditContactViewController: FormViewController {
+    // dependency
+    let realm = try! Realm()
+    //view model
     var formToEditAContact: Bool = true
-    var contactToEdit: Contact?
+    var contactVM: Contact!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //add save button
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: .saveButtonPressed)
+        navigationItem.rightBarButtonItem = saveButton
         setupForm()
     }
     
     private func setupForm(){
-        
-        let contact: Contact
         if formToEditAContact {
-            if contactToEdit == nil{
+            if contactVM == nil{
                 fatalError("contactToEdit not set")
-            }else{
-                contact = contactToEdit!
             }
         }else{
-            contact = Contact()
+            contactVM = Contact()
         }
         
         form
@@ -38,20 +41,30 @@ class EditContactViewController: FormViewController {
                 row.placeholder = "First Name"
                 row.add(rule: RuleRequired())
                 if self.formToEditAContact {
-                    row.value = contact.firstName
+                    row.value = contactVM?.firstName
+                }
+                row.onChange{ [unowned self ] row in
+                    if let fName = row.value{
+                        self.contactVM.firstName = fName
+                    }
                 }
                 }.cellUpdate{cell, row in
                     if !row.isValid{
                         cell.textLabel?.textColor = .red
-                    }
+                }
             }
             
             <<< TextRow("lName") {
                 $0.title = "Last Name"
                 if self.formToEditAContact {
-                    $0.value = contact.lastName
+                    $0.value = self.contactVM.lastName
                 }
                 $0.add(rule: RuleRequired())
+                $0.onChange{[unowned self] row in
+                    if let lName = row.value{
+                        self.contactVM.lastName = lName
+                    }
+                }
                 }.cellUpdate{cell, row in
                     if !row.isValid{
                         cell.textLabel?.textColor = .red
@@ -61,28 +74,45 @@ class EditContactViewController: FormViewController {
             <<< DateRow("lastCheckinDate") {
                 $0.title = "Last check-in date"
                 if self.formToEditAContact {
-                    $0.value = contact.lastContactDate
+                    $0.value = self.contactVM.lastContactDate
                 }else{
                     $0.value = Date()
                 }
+                //TODO: last check-in date cannot be future
             }
             
             <<< StepperRow(){
                 $0.title = "Cadence"
                 $0.tag = "integer"
                 $0.value = 0
-                
                 $0.cell.stepper.stepValue = 1
                 $0.displayValueFor = { value in
                     guard let value = value else { return nil }
                     return "\(Int(value))"
                 }
-        }
+            }
     }
     
-    @IBAction func saveButtonPressed(_ sender: Any) {
-        //save the form data
-        
-        //dismiss current view controller
+    //MARK: - Actions
+    @objc fileprivate func saveButtonPressed(_ sender: UIBarButtonItem){
+        print("contact (new or updated) should be saved in here")
+        if self.formToEditAContact {
+            print("changes to the contact should be persisted in here")
+        }
+        else{
+            do{
+                try realm.write{
+                    realm.add(self.contactVM)
+                }
+                print("new contact saved")
+            }catch{
+                fatalError("error saving contact")
+            }
+        }
+        _ = navigationController?.popViewController(animated: true)
     }
+}
+
+extension Selector{
+    fileprivate static let saveButtonPressed = #selector(EditContactViewController.saveButtonPressed(_:))
 }
