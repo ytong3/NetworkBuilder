@@ -13,6 +13,7 @@ import RealmSwift
 class EditContactViewController: FormViewController {
     // dependency
     let realm = try! Realm()
+    
     //view model
     var formToEditAContact: Bool = true
     var contactVM: Contact!
@@ -43,11 +44,6 @@ class EditContactViewController: FormViewController {
                 if self.formToEditAContact {
                     row.value = contactVM?.firstName
                 }
-                row.onChange{ [unowned self ] row in
-                    if let fName = row.value{
-                        self.contactVM.firstName = fName
-                    }
-                }
                 }.cellUpdate{cell, row in
                     if !row.isValid{
                         cell.textLabel?.textColor = .red
@@ -60,16 +56,10 @@ class EditContactViewController: FormViewController {
                     $0.value = self.contactVM.lastName
                 }
                 $0.add(rule: RuleRequired())
-                $0.onChange{[unowned self] row in
-                    if let lName = row.value{
-                        self.contactVM.lastName = lName
-                    }
-                }
                 }.cellUpdate{cell, row in
                     if !row.isValid{
                         cell.textLabel?.textColor = .red
-                    }
-            }
+                }}
             
             <<< DateRow("lastCheckinDate") {
                 $0.title = "Last check-in date"
@@ -81,27 +71,54 @@ class EditContactViewController: FormViewController {
                 //TODO: last check-in date cannot be future
             }
             
-            <<< StepperRow(){
-                $0.title = "Cadence"
-                $0.tag = "integer"
-                $0.value = 0
+            <<< StepperRow("cadence"){
+                $0.title = "Cadence (weeks)"
+                $0.tag = "cadence"
+                $0.value = Double(self.contactVM.cadence)
                 $0.cell.stepper.stepValue = 1
                 $0.displayValueFor = { value in
                     guard let value = value else { return nil }
                     return "\(Int(value))"
                 }
             }
+            
+        if self.formToEditAContact {
+            form
+            +++ Section()
+            <<< ButtonRow("actions"){
+                    $0.title = "Delete"
+                    $0.onCellSelection(self.deleteButtonPressed)
+            }
+
+        }
     }
     
     //MARK: - Actions
     @objc fileprivate func saveButtonPressed(_ sender: UIBarButtonItem){
         print("contact (new or updated) should be saved in here")
+        
+        let formData = form.values()
+        
         if self.formToEditAContact {
             print("changes to the contact should be persisted in here")
+            do{
+                try realm.write {
+                    contactVM.firstName = formData["fName"] as! String
+                    contactVM.lastName = formData["lName"] as! String
+                    contactVM.lastContactDate = formData["lastCheckinDate"] as! Date
+                    contactVM.cadence = Int(formData["cadence"] as! Double)
+                }
+            }catch{
+                fatalError("error saving contact update")
+            }
         }
         else{
             do{
                 try realm.write{
+                    contactVM.firstName = formData["fName"] as! String
+                    contactVM.lastName = formData["lName"] as! String
+                    contactVM.lastContactDate = formData["lastCheckinDate"] as! Date
+                    contactVM.cadence = Int(formData["cadence"] as! Double)
                     realm.add(self.contactVM)
                 }
                 print("new contact saved")
@@ -110,6 +127,33 @@ class EditContactViewController: FormViewController {
             }
         }
         _ = navigationController?.popViewController(animated: true)
+    }
+
+    private func deleteButtonPressed(cell: ButtonCellOf<String>, row: ButtonRow){
+        print("should delete the contact now")
+        // should pop up a alert
+        let alert = UIAlertController(title: "Confirm", message: "Confirm to delete", preferredStyle: .actionSheet)
+        
+        let ok = UIAlertAction(title: "OK", style: .destructive, handler: {action in
+            print("OK button presses")
+            do{
+                try self.realm.write {
+                    self.realm.delete(self.contactVM)
+                }
+            }catch{
+                fatalError("error deleting a contact")
+            }
+            
+            //go back to two screen back
+            //self.navigationController!.popToRootViewController(animated: true)
+            self.popBack(3)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -13,4 +13,5 @@ class Contact: Object {
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var lastContactDate: Date = Date()
+    @objc dynamic var cadence: Int = 4
 }

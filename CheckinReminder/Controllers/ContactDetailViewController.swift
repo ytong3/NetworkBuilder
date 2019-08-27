@@ -22,10 +22,18 @@ class ContactDetailViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupView()
+    }
+    
+    func setupView() {
         guard let firstName = contact?.firstName,
-              let lastName = contact?.lastName,
-              let lastContactDate = contact?.lastContactDate else {
-            fatalError("Contact not loaded correctly")
+            let lastName = contact?.lastName,
+            let lastContactDate = contact?.lastContactDate else {
+                fatalError("Contact not loaded correctly")
         }
         
         nameLabel.text = "\(firstName) \(lastName)"
