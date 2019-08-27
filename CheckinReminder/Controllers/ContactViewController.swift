@@ -29,7 +29,7 @@ class ContactViewController: UITableViewController {
     }
     
     private func loadAllContacts(){
-        contacts = realm.objects(Contact.self)
+        contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName", ascending: true)
         dataSource = ContactsDataSource(with: Array(contacts!), for: "contactCell")
         tableView.dataSource = dataSource
         tableView.reloadData()
