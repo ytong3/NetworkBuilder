@@ -107,6 +107,7 @@ class EditContactViewController: FormViewController {
                     contactVM.lastName = formData["lName"] as! String
                     contactVM.lastContactDate = formData["lastCheckinDate"] as! Date
                     contactVM.cadence = Int(formData["cadence"] as! Double)
+                    contactVM.calculateNextDueDate()
                 }
             }catch{
                 fatalError("error saving contact update")
@@ -119,6 +120,7 @@ class EditContactViewController: FormViewController {
                     contactVM.lastName = formData["lName"] as! String
                     contactVM.lastContactDate = formData["lastCheckinDate"] as! Date
                     contactVM.cadence = Int(formData["cadence"] as! Double)
+                    contactVM.calculateNextDueDate()
                     realm.add(self.contactVM)
                 }
                 print("new contact saved")

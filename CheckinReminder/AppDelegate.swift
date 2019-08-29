@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            let contact1 = Contact()
 //            contact1.firstName = "Jon"
 //            contact1.lastName = "Snow"
+//            contact1.calculateNextDueDate()
 //
 //            let contact2 = Contact()
 //            contact2.firstName = "Arya"

@@ -24,12 +24,12 @@ class ContactViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
+        super.viewWillAppear(animated)
         loadAllContacts()
     }
     
     private func loadAllContacts(){
-        contacts = realm.objects(Contact.self).sorted(byKeyPath: "firstName", ascending: true)
+        contacts = realm.objects(Contact.self).sorted(byKeyPath: "lastName", ascending: true)
         dataSource = ContactsDataSource(with: Array(contacts!), for: "contactCell")
         tableView.dataSource = dataSource
         tableView.reloadData()

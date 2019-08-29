@@ -14,4 +14,12 @@ class Contact: Object {
     @objc dynamic var lastName: String = ""
     @objc dynamic var lastContactDate: Date = Date()
     @objc dynamic var cadence: Int = 4
+    @objc dynamic var nextDueDate: Date!
+    
+    func calculateNextDueDate() {
+        let day : TimeInterval = 3600.0 * 24
+        let week : TimeInterval = 7 * day
+        let timeInterval : TimeInterval = Double(cadence) * week
+        self.nextDueDate = Date(timeInterval: timeInterval, since: lastContactDate)
+    }
 }

@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NowContactViewController: UITableViewController{
     //MARK: - Dependency
-    let contactRepo = sharedContactRepository
-    
+    let realm = try! Realm()
     //MARK: - Properties
-    var contacts: [Contact]?
+    var contacts: Results<Contact>?
     var dataSource: ContactsDataSource?
+    let todayDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contacts = sharedContactRepository.getContactsDueForCatchUp()
-        dataSource = ContactsDataSource(with: self.contacts!, for: "nowContactCell")
+        loadDueContact()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated )
+        loadDueContact()
+    }
+    
+    private func loadDueContact(){
+        contacts = realm.objects(Contact.self).filter("nextDueDate <= %@", todayDate).sorted(byKeyPath: "lastName")
+        dataSource = ContactsDataSource(with: Array(contacts!), for: "nowContactCell")
         tableView.dataSource = dataSource
         tableView.reloadData()
     }
