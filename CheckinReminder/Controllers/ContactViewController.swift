@@ -21,6 +21,10 @@ class ContactViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAllContacts()
+        
+        //title
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.title = "Contact Today"
     }
     
     override func viewWillAppear(_ animated: Bool) {

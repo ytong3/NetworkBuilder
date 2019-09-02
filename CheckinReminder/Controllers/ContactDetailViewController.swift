@@ -7,40 +7,115 @@
 //
 
 import UIKit
+import RealmSwift
+import SnapKit
 
 class ContactDetailViewController: UIViewController {
     // MARK: - Properties
+    let realm = try! Realm()
     var contact: Contact?
     
-    //TODOL - make contact detal view progmatically
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var lastContactDateLabel: UILabel!
-    @IBOutlet weak var notesLabel: UILabel!
+    //TODO: - make contact detal view progmatically
+    let nameLabel = UILabel()
+    let cadenceLabel = UILabel()
+    let lastContactDateLabel = UILabel()
+    let notesLabel = UILabel()
+    let markCaughtUpBotton = UIButton(type: .system)
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d yyyy"
+        return formatter
+    }()
+    
     @IBAction func editButtonPressed(_ sender: Any) {
         print("edit button pressed. sugue to be performed")
         performSegue(withIdentifier: "gotoEditContact", sender: self)
     }
     
     override func viewDidLoad() {
-        setupView()
+        super.viewDidLoad()
+        setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupView()
+        super.viewWillAppear(animated)
+        setupViews()
     }
     
-    func setupView() {
+    func setupViews() {
+        // labels and buttons
         guard let firstName = contact?.firstName,
             let lastName = contact?.lastName,
+            let cadence = contact?.cadence,
             let lastContactDate = contact?.lastContactDate else {
                 fatalError("Contact not loaded correctly")
         }
         
         nameLabel.text = "\(firstName) \(lastName)"
+        cadenceLabel.text = "Once every \(cadence) weeks"
+        lastContactDateLabel.text = ContactDetailViewController.dateFormatter.string(from: lastContactDate)
+        notesLabel.text = "No notes available."
+        markCaughtUpBotton.setTitle("Already caught up with \(firstName)", for: .normal)
         
-        let dateFormatter : DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM-dd-yyyy"
-        lastContactDateLabel.text = dateFormatter.string(from: lastContactDate)
+        // styling
+        nameLabel.numberOfLines = 0
+        nameLabel.textColor = .purple
+        nameLabel.font = .systemFont(ofSize: 25)
+        
+        cadenceLabel.numberOfLines = 0
+        cadenceLabel.font = .systemFont(ofSize: 15)
+        
+        lastContactDateLabel.font = .systemFont(ofSize: 15)
+        
+        notesLabel.numberOfLines = 0
+        notesLabel.font = .italicSystemFont(ofSize: 15)
+        
+        
+        markCaughtUpBotton.addTarget(self, action: #selector(caughtUpButtonPressed), for: .touchUpInside)
+        if (contact!.nextDueDate > Date()){
+            markCaughtUpBotton.isHidden = true
+        }
+        else{
+            markCaughtUpBotton.isHidden = false
+        }
+        
+        // layout
+        let stackView = UIStackView(arrangedSubviews: [nameLabel, cadenceLabel, lastContactDateLabel, notesLabel])
+        
+        stackView.spacing = 4
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        view.addSubview(stackView)
+        view.addSubview(markCaughtUpBotton)
+        
+        stackView.snp.makeConstraints{ make in
+            make.leading.equalTo(view).offset(32)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(32)
+            make.width.equalTo(view.safeAreaLayoutGuide)
+            
+        }
+        
+        markCaughtUpBotton.snp.makeConstraints{ make in
+            make.top.equalTo(stackView.snp.bottom).offset(4)
+            make.leading.equalTo(stackView.snp.leading)
+        }
+        
+        view.setNeedsLayout()
+    }
+    
+    @objc func caughtUpButtonPressed(sender: UIButton!){
+        print("button pressed. Should update date and due date.")
+        // perhaps ask the user to confirm
+        do{
+            try realm.write {
+                contact?.lastContactDate = Date()
+                contact?.calculateNextDueDate()
+                }
+            }catch{
+                fatalError("error saving catch up.")
+        }
+        setupViews()
     }
 }
 

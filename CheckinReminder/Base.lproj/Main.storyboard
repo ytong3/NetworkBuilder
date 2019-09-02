@@ -49,35 +49,7 @@
                     <view key="view" contentMode="scaleToFill" id="n0y-TK-ZLi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBC-Ul-mql">
-                                <rect key="frame" x="20" y="104" width="72" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last contact date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-LP-BIV">
-                                <rect key="frame" x="20" y="146" width="134" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ubo-yi-sed">
-                                <rect key="frame" x="20" y="175" width="37" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="RBC-Ul-mql" firstAttribute="top" secondItem="K7E-H5-hbL" secondAttribute="top" constant="16" id="5Ip-9w-UxL"/>
-                            <constraint firstItem="RBC-Ul-mql" firstAttribute="leading" secondItem="K7E-H5-hbL" secondAttribute="leading" constant="20" id="BeB-7L-paf"/>
-                            <constraint firstItem="uKh-LP-BIV" firstAttribute="top" secondItem="RBC-Ul-mql" secondAttribute="bottom" constant="8" id="Dc4-94-vPQ"/>
-                            <constraint firstItem="Ubo-yi-sed" firstAttribute="leading" secondItem="K7E-H5-hbL" secondAttribute="leading" constant="20" id="FDc-ib-gy7"/>
-                            <constraint firstItem="uKh-LP-BIV" firstAttribute="leading" secondItem="K7E-H5-hbL" secondAttribute="leading" constant="20" id="U5j-ah-SLA"/>
-                            <constraint firstItem="Ubo-yi-sed" firstAttribute="top" secondItem="uKh-LP-BIV" secondAttribute="bottom" constant="8" id="gYO-cg-mxD"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="K7E-H5-hbL"/>
                     </view>
                     <navigationItem key="navigationItem" title="Contact Detail" id="85i-PM-BKQ">
@@ -95,11 +67,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="lastContactDateLabel" destination="uKh-LP-BIV" id="eZD-FR-Yxe"/>
-                        <outlet property="nameLabel" destination="RBC-Ul-mql" id="zRP-na-FIw"/>
-                        <outlet property="notesLabel" destination="Ubo-yi-sed" id="wCU-hM-ahi"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7o-YE-2BA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,8 +150,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jLm-Hm-klO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="RVi-eD-naI"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y0I-uq-A6l">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Y0I-uq-A6l">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -202,8 +169,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vPF-zA-RNV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="528-wc-aEH"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Amn-E1-1we">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Amn-E1-1we">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -217,7 +184,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="asL-gk-lwt"/>
+        <segue reference="8OJ-Q4-jQp"/>
         <segue reference="xCs-Re-TfY"/>
     </inferredMetricsTieBreakers>
 </document>

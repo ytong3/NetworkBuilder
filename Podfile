@@ -9,5 +9,6 @@ target 'CheckinReminder' do
   pod 'RealmSwift'
   pod 'Eureka'
   pod 'ChameleonFramework'
+  pod 'SnapKit', '~> 5.0.0'
 
 end

@@ -19,6 +19,10 @@ class NowContactViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //title
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.title = "Contact Today"
+        
         loadDueContact()
     }
     
