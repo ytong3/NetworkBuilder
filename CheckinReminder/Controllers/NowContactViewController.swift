@@ -21,7 +21,7 @@ class NowContactViewController: UITableViewController{
         super.viewDidLoad()
         //title
         navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.title = "Contact Today"
+        navigationItem.title = "Today"
         
         loadDueContact()
     }

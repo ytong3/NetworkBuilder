@@ -24,7 +24,7 @@ class ContactViewController: UITableViewController {
         
         //title
         navigationItem.largeTitleDisplayMode = .automatic
-        navigationItem.title = "Contact Today"
+        navigationItem.title = "Contact"
     }
     
     override func viewWillAppear(_ animated: Bool) {

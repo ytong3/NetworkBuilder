@@ -20,6 +20,7 @@ class EditContactViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         //add save button
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: .saveButtonPressed)
         navigationItem.rightBarButtonItem = saveButton

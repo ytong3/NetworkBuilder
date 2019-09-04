@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="1657.9710144927537" y="-386.38392857142856"/>
         </scene>
-        <!--Contact Detail-->
+        <!--Contact Detail View Controller-->
         <scene sceneID="JL0-Zs-wgK">
             <objects>
                 <viewController id="XSi-ne-fFf" customClass="ContactDetailViewController" customModule="CheckinReminder" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +52,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="K7E-H5-hbL"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contact Detail" id="85i-PM-BKQ">
+                    <navigationItem key="navigationItem" id="85i-PM-BKQ">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="lla-8U-4gv">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yYI-QE-ta9">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
@@ -184,7 +184,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8OJ-Q4-jQp"/>
+        <segue reference="asL-gk-lwt"/>
         <segue reference="xCs-Re-TfY"/>
     </inferredMetricsTieBreakers>
 </document>
