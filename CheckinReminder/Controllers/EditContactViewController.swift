@@ -47,12 +47,12 @@ class EditContactViewController: FormViewController {
                 }
                 }.cellUpdate{cell, row in
                     if !row.isValid{
-                        cell.textLabel?.textColor = .red
+                        cell.textLabel?.textColor = .red}
                 }
-            }
             
             <<< TextRow("lName") {
                 $0.title = "Last Name"
+                $0.placeholder = "Last Name"
                 if self.formToEditAContact {
                     $0.value = self.contactVM.lastName
                 }
@@ -97,6 +97,12 @@ class EditContactViewController: FormViewController {
     //MARK: - Actions
     @objc fileprivate func saveButtonPressed(_ sender: UIBarButtonItem){
         print("contact (new or updated) should be saved in here")
+        
+        //input validation
+        if form.validate().count > 0 {
+            popUpAlert(message: "Incomplete information. Please complete the form.")
+            return
+        }
         
         let formData = form.values()
         
@@ -162,4 +168,17 @@ class EditContactViewController: FormViewController {
 
 extension Selector{
     fileprivate static let saveButtonPressed = #selector(EditContactViewController.saveButtonPressed(_:))
+}
+
+extension EditContactViewController{
+    func popUpAlert(message: String){
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .destructive, handler: {action in
+            print("OK button presses")
+        })
+        
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
