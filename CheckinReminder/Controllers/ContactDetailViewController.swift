@@ -111,7 +111,7 @@ class ContactDetailViewController: UIViewController {
         do{
             try realm.write {
                 contact?.lastContactDate = Date()
-                contact?.calculateNextDueDate()
+                contact?.updateDueDate()
                 }
             }catch{
                 fatalError("error saving catch up.")

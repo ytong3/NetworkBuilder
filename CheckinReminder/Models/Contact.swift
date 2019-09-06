@@ -16,7 +16,7 @@ class Contact: Object {
     @objc dynamic var cadence: Int = 4
     @objc dynamic var nextDueDate: Date!
     
-    func calculateNextDueDate() {
+    func updateDueDate() {
         let day : TimeInterval = 3600.0 * 24
         let week : TimeInterval = 7 * day
         let timeInterval : TimeInterval = Double(cadence) * week

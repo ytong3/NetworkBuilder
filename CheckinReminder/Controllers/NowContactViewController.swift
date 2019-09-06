@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 class NowContactViewController: UITableViewController{
     //MARK: - Dependency
@@ -23,12 +24,23 @@ class NowContactViewController: UITableViewController{
         navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.title = "Today"
         
+        UNUserNotificationCenter.current().requestAuthorization(options: .badge)
+        { (granted, error) in
+            if error != nil {
+                // success!
+            }
+        }
+
         loadDueContact()
+        
+        UIApplication.shared.applicationIconBadgeNumber = contacts?.count ?? 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated )
         loadDueContact()
+        UIApplication.shared.applicationIconBadgeNumber = contacts?.count ?? 0
+
     }
     
     private func loadDueContact(){
