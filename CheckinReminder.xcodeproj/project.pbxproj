@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E65E9CE23300F7E0013B8EA /* DueContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E65E9CD23300F7E0013B8EA /* DueContactCell.swift */; };
 		9E6EE5F6230383C600F146AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6EE5F5230383C600F146AF /* AppDelegate.swift */; };
 		9E6EE5FD230383C600F146AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E6EE5FB230383C600F146AF /* Main.storyboard */; };
 		9E6EE5FF230383C800F146AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E6EE5FE230383C800F146AF /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		138FDC85A0A067BACA4A0A1F /* Pods-CheckinReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckinReminder.debug.xcconfig"; path = "Target Support Files/Pods-CheckinReminder/Pods-CheckinReminder.debug.xcconfig"; sourceTree = "<group>"; };
 		7220B53F2103759FD44CF34A /* Pods-CheckinReminder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckinReminder.release.xcconfig"; path = "Target Support Files/Pods-CheckinReminder/Pods-CheckinReminder.release.xcconfig"; sourceTree = "<group>"; };
 		7EF4968C00DC14CBE61E107C /* Pods_CheckinReminder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CheckinReminder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E65E9CD23300F7E0013B8EA /* DueContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueContactCell.swift; sourceTree = "<group>"; };
 		9E6EE5F2230383C600F146AF /* CheckinReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckinReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6EE5F5230383C600F146AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E6EE5FC230383C600F146AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9E65E9CC23300F660013B8EA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E65E9CD23300F7E0013B8EA /* DueContactCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9E6EE5E9230383C600F146AF = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +94,7 @@
 		9E6EE5F4230383C600F146AF /* CheckinReminder */ = {
 			isa = PBXGroup;
 			children = (
+				9E65E9CC23300F660013B8EA /* Views */,
 				9E74D988230C111500CF5556 /* Services */,
 				9E6EE60C2303958900F146AF /* Models */,
 				9E6EE6092303935E00F146AF /* Controllers */,
@@ -251,6 +262,7 @@
 				9E6EE60E2303959800F146AF /* Contact.swift in Sources */,
 				9EB6F9972304698B0097CE46 /* ContactDetailViewController.swift in Sources */,
 				9EFAC3942314B38900E66D1B /* UIViewControllerExtension.swift in Sources */,
+				9E65E9CE23300F7E0013B8EA /* DueContactCell.swift in Sources */,
 				9E6EE60B2303938E00F146AF /* NowContactViewController.swift in Sources */,
 				9E74D98C230DE1A300CF5556 /* EditContactViewController.swift in Sources */,
 				9E74D985230B7D6A00CF5556 /* ContactViewController.swift in Sources */,

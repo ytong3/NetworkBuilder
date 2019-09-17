@@ -25,7 +25,7 @@ class ContactsDataSource: NSObject, UITableViewDataSource {
         if let contact = contacts?[indexPath.row]{
             cell.textLabel?.text = "\(contact.firstName) \(contact.lastName)"
         }
-        
+
         return cell
     }
     

@@ -14,12 +14,16 @@ class NowContactViewController: UITableViewController{
     //MARK: - Dependency
     let realm = try! Realm()
     //MARK: - Properties
+    let cellId = "nowContactCell"
     var contacts: Results<Contact>?
     var dataSource: ContactsDataSource?
     let todayDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // table style
+        tableView.separatorStyle = .none
+        
         //title
         navigationItem.largeTitleDisplayMode = .automatic
         navigationItem.title = "Today"
@@ -30,9 +34,10 @@ class NowContactViewController: UITableViewController{
                 // success!
             }
         }
-
-        loadDueContact()
         
+        tableView.register(DueContactCell.self, forCellReuseIdentifier: cellId)
+        
+        loadDueContact()
         UIApplication.shared.applicationIconBadgeNumber = contacts?.count ?? 0
     }
     
@@ -40,14 +45,24 @@ class NowContactViewController: UITableViewController{
         super.viewWillAppear(animated )
         loadDueContact()
         UIApplication.shared.applicationIconBadgeNumber = contacts?.count ?? 0
-
     }
     
     private func loadDueContact(){
         contacts = realm.objects(Contact.self).filter("nextDueDate <= %@", todayDate).sorted(byKeyPath: "lastName")
-        dataSource = ContactsDataSource(with: Array(contacts!), for: "nowContactCell")
-        tableView.dataSource = dataSource
         tableView.reloadData()
+    }
+}
+
+// MAKR: - Table view data source
+extension NowContactViewController{
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DueContactCell
+        cell.contact = contacts![indexPath.row]
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contacts?.count ?? 0
     }
 }
 
@@ -55,6 +70,10 @@ class NowContactViewController: UITableViewController{
 extension NowContactViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToContact", sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

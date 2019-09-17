@@ -15,7 +15,6 @@ class ContactDetailViewController: UIViewController {
     let realm = try! Realm()
     var contact: Contact?
     
-    //TODO: - make contact detal view progmatically
     let nameLabel = UILabel()
     let cadenceLabel = UILabel()
     let lastContactDateLabel = UILabel()
