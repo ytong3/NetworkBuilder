@@ -45,7 +45,8 @@ class DueContactCell: UITableViewCell {
     
     private let backgroundCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.flatBlue()
+        view.backgroundColor = UIColor.flatPowderBlue
+        //view.backgroundColor = UIColor(gradientStyle: UIGradientStyle.leftToRight, withFrame: view.frame, andColors: [UIColor.red, UIColor.lightGray])
         return view
     }()
     
@@ -61,13 +62,13 @@ class DueContactCell: UITableViewCell {
         }
         
         contactNameLabel.snp.makeConstraints{make in
-            make.top.equalTo(backgroundCardView.snp.top).offset(5)
-            make.leading.equalTo(backgroundCardView.snp.leading).offset(5)
+            make.top.equalTo(backgroundCardView.snp.top).offset(10)
+            make.leading.equalTo(backgroundCardView.snp.leading).offset(10)
         }
         
         lastContactTime.snp.makeConstraints{make in
             make.top.equalTo(contactNameLabel.snp.bottom).offset(3)
-            make.leading.equalTo(backgroundCardView.snp.leading).offset(5)
+            make.leading.equalTo(contactNameLabel.snp.leading)
         }
 
         

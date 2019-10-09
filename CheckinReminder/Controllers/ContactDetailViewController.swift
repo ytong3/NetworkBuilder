@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SnapKit
+import ChameleonFramework
 
 class ContactDetailViewController: UIViewController {
     // MARK: - Properties
@@ -20,6 +21,7 @@ class ContactDetailViewController: UIViewController {
     let lastContactDateLabel = UILabel()
     let notesLabel = UILabel()
     let markCaughtUpBotton = UIButton(type: .system)
+    let testSquareView = UIView()
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -100,6 +102,16 @@ class ContactDetailViewController: UIViewController {
             make.top.equalTo(stackView.snp.bottom).offset(4)
             make.leading.equalTo(stackView.snp.leading)
         }
+        
+        view.addSubview(testSquareView)
+        
+        testSquareView.snp.makeConstraints{make in
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().dividedBy(2)
+        }
+        //testSquareView.backgroundColor = GradientColor(.leftToRight, frame: testSquareView.frame, colors: [.flatRed, .flatSkyBlueDark, .flatBlue])
+        testSquareView.backgroundColor = UIColor.flatLime
         
         view.setNeedsLayout()
     }

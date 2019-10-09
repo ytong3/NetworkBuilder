@@ -8,7 +8,6 @@ target 'CheckinReminder' do
   # Pods for CheckinReminder
   pod 'RealmSwift'
   pod 'Eureka'
-  pod 'ChameleonFramework'
   pod 'SnapKit', '~> 5.0.0'
-
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 end
